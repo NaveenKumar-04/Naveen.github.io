@@ -1,28 +1,739 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Naveen Kumar Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naveen Kumar | Portfolio</title>
+  <meta name="description" content="Portfolio of Naveen Kumar, Computer Science student specializing in Python, Django, Machine Learning, IoT, Cybersecurity, and Blockchain." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121935;
+      --panel: #151d3a;
+      --panel-2: #1a2347;
+      --text: #e8ecff;
+      --muted: #aab4db;
+      --line: rgba(255,255,255,0.10);
+      --accent: #5eead4;
+      --accent-2: #60a5fa;
+      --accent-3: #c084fc;
+      --success: #86efac;
+      --shadow: 0 16px 40px rgba(0,0,0,0.28);
+      --radius: 18px;
+      --max: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,0.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(192,132,252,0.14), transparent 28%),
+        linear-gradient(180deg, #0a0f1f 0%, #0d1330 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 36px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 12, 28, 0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 84px 0 64px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(94,234,212,0.28);
+      color: var(--accent);
+      background: rgba(94,234,212,0.08);
+      border-radius: 999px;
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #08111b;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(94,234,212,0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .meta-card, .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .meta-card {
+      padding: 18px;
+    }
+
+    .meta-card h3 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .meta-card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .profile-card {
+      padding: 28px;
+    }
+
+    .avatar {
+      width: 82px;
+      height: 82px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .profile-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .profile-list {
+      list-style: none;
+      margin-top: 18px;
+    }
+
+    .profile-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .info-card {
+      padding: 28px;
+    }
+
+    .info-card p {
+      color: var(--muted);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .timeline-item h3 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item .sub {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item .date {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+    }
+
+    .timeline-item p,
+    .timeline-item li {
+      color: var(--muted);
+    }
+
+    .timeline-item ul {
+      padding-left: 18px;
+    }
+
+    .skills-wrap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .skill-card {
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .skill-card h3 {
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project-card {
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(96,165,250,0.10), transparent 45%, rgba(192,132,252,0.10));
+      pointer-events: none;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      color: var(--accent);
+      background: rgba(94,234,212,0.08);
+      border: 1px solid rgba(94,234,212,0.16);
+      padding: 7px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .project-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-points {
+      margin-top: 14px;
+      padding-left: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-points li {
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .cert-grid,
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .simple-card {
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .simple-card ul {
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+    }
+
+    .contact-card {
+      padding: 28px;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-top: 18px;
+    }
+
+    .contact-list li {
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 30px 0 50px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .grid-2,
+      .contact-grid,
+      .projects-grid,
+      .skills-wrap,
+      .cert-grid,
+      .achieve-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 14px;
+        justify-content: center;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .hero,
+      .section {
+        padding: 72px 0;
+      }
+
+      .hero-meta,
+      .grid-2,
+      .contact-grid,
+      .projects-grid,
+      .skills-wrap,
+      .cert-grid,
+      .achieve-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Naveen Kumar</h1>
-  <p>Aspiring developer focused on Python, Django, and machine learning.</p>
 
-  <h2>About Me</h2>
-  <p>I am a student developer building web and machine learning projects.</p>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#home" class="logo">NAVEEN KUMAR</a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#education">Education</a>
+          <a href="#skills">Skills</a>
+          <a href="#internship">Internship</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <h2>Projects</h2>
-  <ul>
-    <li>Lung Cancer Detection Model</li>
-    <li>Plant Communication Classification</li>
-    <li>Internship Machine Learning Work</li>
-  </ul>
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="badge">Computer Science Student • ML & Django Developer</span>
+          <h1>Building intelligent web applications with Python, Django, and Machine Learning.</h1>
+          <p>
+            I am Naveen Kumar, a BE student in Computer Science specializing in IoT, Cybersecurity, and Blockchain.
+            I build practical machine learning applications, medical AI solutions, and Django-based web interfaces that
+            turn models into usable products.
+          </p>
 
-  <h2>Skills</h2>
-  <p>Python, Django, HTML, CSS, Machine Learning, Git</p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            <a href="mailto:naveenkumar5415n@gmail.com" class="btn btn-secondary">Email Resume</a>
+          </div>
 
-  <h2>Contact</h2>
-  <p>Email: youremail@example.com</p>
-</body>
-</html>
+          <div class="hero-meta">
+            <div class="meta-card">
+              <h3>8.5</h3>
+              <span>Current CGPA</span>
+            </div>
+            <div class="meta-card">
+              <h3>600+</h3>
+              <span>CodeChef Problems</span>
+            </div>
+            <div class="meta-card">
+              <h3>800+</h3>
+              <span>Total Problems Solved</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card profile-card">
+          <div class="avatar">NK</div>
+          <h3>Naveen Kumar</h3>
+          <p style="color: var(--muted);">
+            Python Programmer, Django Developer, and Machine Learning Enthusiast focused on building useful software with clear interfaces and real-world application.
+          </p>
+          <ul class="profile-list">
+            <li><strong>Location:</strong> Kundapura, Udupi, Karnataka</li>
+            <li><strong>Email:</strong> naveenkumar5415n@gmail.com</li>
+            <li><strong>Phone:</strong> +91 9844893509</li>
+            <li><strong>Degree:</strong> BE CSE (IoT, Cybersecurity, Blockchain)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">
+        I am a motivated engineering student with strong interest in machine learning, Django development, problem solving,
+        and intelligent systems. My work combines Python programming, data-driven decision making, and web-based interfaces
+        to create projects that are practical, explainable, and user friendly.
+      </p>
+
+      <div class="grid-2">
+        <div class="card info-card">
+          <h3 style="margin-bottom: 12px;">What I Focus On</h3>
+          <p>
+            I enjoy building applications where machine learning models are not just trained, but also integrated into
+            usable systems. My recent work includes medical prediction models, plant communication classification, and
+            image-based diagnosis using deep learning pipelines.
+          </p>
+        </div>
+        <div class="card info-card">
+          <h3 style="margin-bottom: 12px;">Core Strengths</h3>
+          <p>
+            My strengths include Python development, Django integration, ML workflow implementation, algorithmic problem solving,
+            and fast adaptation to new technical tools. I also have coursework exposure to AI, cybersecurity, operating systems,
+            data structures, networks, and IoT.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
+      <p class="section-subtitle">
+        My academic background combines computer science fundamentals with applied exposure to AI, security, and modern software development.
+      </p>
+
+      <div class="timeline">
+        <div class="card timeline-item">
+          <h3>Alvas Institute of Engineering and Technology</h3>
+          <div class="sub">BE in Computer Science (IoT, Cybersecurity, and Blockchain)</div>
+          <div class="date">Nov 2022 – June 2026 • Mangalore, Karnataka • CGPA: 8.5</div>
+          <p>
+            Studying core computer science concepts along with specialized knowledge in connected systems, security, and modern application development.
+          </p>
+        </div>
+
+        <div class="card timeline-item">
+          <h3>Govt PU College</h3>
+          <div class="sub">PCMB</div>
+          <div class="date">Aug 2020 – Apr 2022 • Byndoor, Karnataka • 65%</div>
+        </div>
+
+        <div class="card timeline-item">
+          <h3>Govt Junior College</h3>
+          <div class="sub">SSLC</div>
+          <div class="date">June 2020 • Byndoor, Karnataka • 84.48%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills & Tools</h2>
+      <p class="section-subtitle">
+        My toolkit covers programming, machine learning workflows, development environments, and deployment-oriented development practices.
+      </p>
+
+      <div class="skills-wrap">
+        <div class="skill-card card">
+          <h3>Languages</h3>
+          <div class="chips">
+            <span class="chip">C</span>
+            <span class="chip">Python</span>
+            <span class="chip">Java</span>
+            <span class="chip">HTML</span>
+          </div>
+        </div>
+
+        <div class="skill-card card">
+          <h3>Frameworks & Tech</h3>
+          <div class="chips">
+            <span class="chip">Django</span>
+            <span class="chip">Machine Learning</span>
+            <span class="chip">Jupyter Notebook</span>
+            <span class="chip">Linux</span>
+          </div>
+        </div>
+
+        <div class="skill-card card">
+          <h3>Developer Tools</h3>
+          <div class="chips">
+            <span class="chip">VS Code</span>
+            <span class="chip">Eclipse</span>
+            <span class="chip">Anaconda</span>
+            <span class="chip">Git</span>
+            <span class="chip">GitHub</span>
+          </div>
+        </div>
+
+        <div class="skill-card card">
+          <h3>Relevant Coursework</h3>
+          <div class="chips">
+            <span class="chip">Data Structures</span>
+            <span class="chip">Algorithms</span>
+            <span class="chip">DBMS</span>
+            <span class="chip">AI</span>
+            <span class="chip">IoT</span>
+            <span class="chip">Cyber Security</span>
+            <span class="chip">Networks</span>
+            <span class="chip">Operating Systems</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="internship">
+    <div class="container">
+      <h2 class="section-title">Internship Experience</h2>
+      <p class="section-subtitle">
+        My internship helped me strengthen Python fundamentals and apply machine learning concepts in practical development settings.
+      </p>
+
+      <div class="card timeline-item">
+        <h3>Karunadu Technologies Private Limited</h3>
+        <div class="sub">Python Programming and Applied Machine Learning Intern</div>
+        <div class="date">Feb 2026 – May 2026 • Remote / Bengaluru</div>
+        <ul>
+          <li>Completed a comprehensive internship program focused on Python programming and applied machine learning.</li>
+          <li>Applied core Python concepts to implement machine learning workflows for real-world data analysis tasks.</li>
+          <li>Worked under professional guidance to gain practical exposure to model evaluation and application-oriented ML development.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">
+        These projects reflect my work in deep learning, Django integration, and machine learning-based decision systems.
+      </p>
+
+      <div class="projects-grid">
+        <article class="card project-card">
+          <span class="project-tag">Deep Learning • Medical Imaging</span>
+          <h3>Brain Stroke Detection Using CNN and Deep Learning Models</h3>
+          <p>
+            Built an automated brain stroke diagnosis pipeline using MRI image analysis with deep learning models.
+          </p>
+          <ul class="project-points">
+            <li>Used LeNet for MRI image classification and SegNet for semantic segmentation.</li>
+            <li>Applied preprocessing methods such as normalization and noise filtering on ATLAS medical datasets.</li>
+            <li>Implemented the system in Python using TensorFlow, Keras, OpenCV, and skimage.</li>
+            <li>Focused on efficient and accurate clinical image analysis through an end-to-end pipeline.</li>
+          </ul>
+        </article>
+
+        <article class="card project-card">
+          <span class="project-tag">Django • Machine Learning</span>
+          <h3>Lung Cancer Prediction Using Django and Machine Learning</h3>
+          <p>
+            Developed a web-based prediction system that integrates multiple machine learning models into a user-friendly Django application.
+          </p>
+          <ul class="project-points">
+            <li>Implemented Decision Tree, KNN, Logistic Regression, Naive Bayes, Random Forest, and SVM models.</li>
+            <li>Built an interactive form to collect patient details through a clean Django web interface.</li>
+            <li>Processed input data using Python and scikit-learn for prediction generation.</li>
+            <li>Displayed final prediction results and model-wise accuracies to improv
